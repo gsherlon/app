@@ -1,0 +1,5 @@
+<%= form_for([@user, @user.tweets.build]) do |f| %>
+  <%= f.label :status %>
+  <%= f.text_field :status %>
+  <%= f.submit %>
+<% end %>

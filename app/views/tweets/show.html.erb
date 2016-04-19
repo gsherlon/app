@@ -1,0 +1,7 @@
+<h1>Tweet</h1>
+<p>
+  <%= @user.tweets.build.status %>
+</p>
+
+<%= link_to 'Edit', edit_user_tweet_path(@user, params[:id]) %>
+<%= link_to 'Back', user_tweets_path(@user)%>

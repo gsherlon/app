@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-  before_action :get_data, only:[:show, :edit, :update, :destroy, :index]
+  before_action :get_data, only:[:show, :edit, :update, :destroy, :index, :create]
 
   def show
   end
@@ -8,11 +8,12 @@ class TweetsController < ApplicationController
   end
 
   def index
-
+    @tweets = @user.tweets
   end
 
   def new
-    @user = User.new
+    @user = User.find(params[:user_id])
+    @tweet = @user.tweets.new
   end
 
   def destroy
@@ -29,21 +30,20 @@ class TweetsController < ApplicationController
   end
 
   def create
-    @user = User.new(user_parms)
-    if @user.save
-      redirect_to @user
+    @tweet = @user.tweets.new(tweet_params)
+    if @tweet.save
+      redirect_to user_tweet_path(@user, @tweet)
     else
-      redirect_to new_user_path
+      redirect_to new_user_tweet_path(@user)
     end
   end
 
   private
     def get_data
       @user = User.find(params[:user_id])
-      @tweets = @user.tweets
     end
 
-    def user_parms
+    def tweet_params
       params.require(:tweet).permit([:status])
     end
 end
