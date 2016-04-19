@@ -1,0 +1,21 @@
+<h1>List Users</h1>
+
+<table>
+  <thead>
+    <th>username</th>
+    <th>Name</th>
+    <th>Last_name</th>
+  </thead>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= link_to user.username, user %></td>
+      <td><%= user.name %></td>
+      <td><%= user.last_name %></td>
+      <td><%= link_to 'Tweets', user_tweets_path(user) %></td>
+      <td><%= link_to 'Edit', edit_user_path(user) %></td>
+      <td><%= link_to 'Destroy', user, method: :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<br>
+<%= link_to 'Crear Usuario', new_user_path %>
